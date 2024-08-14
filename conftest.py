@@ -1,10 +1,7 @@
-from unittest.mock import Mock
-
 import pytest
 from selenium import webdriver
 
-from praktikum.colors import Color
-from data import Urls, MockEngine, MockFrame
+from data import Urls
 
 
 @pytest.fixture(params=['firefox', 'chrome'])
@@ -21,22 +18,3 @@ def driver(request):
     yield browser
 
     browser.quit()
-
-
-@pytest.fixture(scope='function')
-def mock_engine():
-    engine = Mock()
-    engine.get_name.return_value = "MockedEngine123"
-    engine.get_weight.return_value = MockEngine.WEIGHT
-
-    return engine
-
-
-@pytest.fixture(scope='function')
-def mock_frame():
-    frame = Mock()
-    frame.get_color.return_value = Color.RED
-    frame.get_weight.return_value = MockFrame.WEIGHT
-
-    return frame
-
